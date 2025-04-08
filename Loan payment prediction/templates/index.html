@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Default Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <img class="logo" src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Loan Icon">
+        <h2>Loan Default Prediction</h2>
+        <form action="/predict" method="post">
+            <input type="text" name="credit.policy" placeholder="Credit Policy (0 or 1)" required>
+
+            <select name="purpose" required>
+                <option value="">-- Select Purpose --</option>
+                <option value="credit_card">Credit Card</option>
+                <option value="debt_consolidation">Debt Consolidation</option>
+                <option value="educational">Educational</option>
+                <option value="home_improvement">Home Improvement</option>
+                <option value="major_purchase">Major Purchase</option>
+                <option value="small_business">Small Business</option>
+                <option value="all_other">All Other</option>
+            </select>
+
+            <input type="text" name="int.rate" placeholder="Interest Rate (e.g., 0.12)" required>
+            <input type="text" name="installment" placeholder="Installment" required>
+            <input type="text" name="log.annual.inc" placeholder="Log Annual Income" required>
+            <input type="text" name="dti" placeholder="Debt-to-Income Ratio" required>
+            <input type="text" name="fico" placeholder="FICO Score" required>
+            <input type="text" name="days.with.cr.line" placeholder="Days With Credit Line" required>
+            <input type="text" name="revol.bal" placeholder="Revolving Balance" required>
+            <input type="text" name="revol.util" placeholder="Revolving Utilization" required>
+            <input type="text" name="inq.last.6mths" placeholder="Inquiries in Last 6 Months" required>
+            <input type="text" name="delinq.2yrs" placeholder="Delinquencies in Last 2 Years" required>
+            <input type="text" name="pub.rec" placeholder="Public Records" required>
+
+            <button type="submit">🔍 Predict</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result-card">
+                <h3>{{ prediction }}</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
